@@ -1,0 +1,22 @@
+nav {
+    background-color: $prjct-clr-1;
+    .pageTitle {
+        color: $prjct-clr-w;
+    }
+}
+.collectionsort-description {
+    padding: 15px;
+    border-right: 1px solid $prjct-clr-2;
+    //border-bottom: 1px solid $prjct-clr-2;
+    //border-top: 1px solid $prjct-clr-2;
+}
+.featurelist {
+    list-style-type: none;
+}
+
+footer {
+    height: 30px;
+    background-color: $prjct-clr-1;
+    color: $prjct-clr-w;
+    font-size: 1.1em;
+}

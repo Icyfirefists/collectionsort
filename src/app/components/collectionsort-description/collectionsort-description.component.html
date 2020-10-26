@@ -1,0 +1,54 @@
+<div class="collectionsort-description col-xs-12 col-sm-12 row">
+  <p class="col-xs-12">
+    Welcome to Collectionsort! This SPA is a data collection/management solution I created when I found I could not find a simple
+    sortable table plugin, while learning Angular. Now I have used this solution in several enterprise applications and other projects.                 
+    I first began with just the standard table, but then I needed to add sorting to the mix. This proved difficult and 
+    became even more challenging because I needed to add filtering as well. Collectionsort uses custom pipes including a pipe 
+    to render text in TitleCase, which capitalises the first letter of the string. Over time this solution has collected many small additions 
+    and custom edits to become capable of many more features. Written with custom pipes, services and fitlers, it is a very 
+    detailed and thorough Angular solution.
+</p>
+<p>
+    Below is a list of the features that collectionsort offers:
+</p>
+<p>
+    Collectionsort currently has two major divisions; Tablesort and Listsort. Tablesort is a table that is capable of the features listed below.
+    Using JSON data it searches, sorts and filters based on the attributes displayed in each column of the table. Listsort is a much more condensed
+    version of tablesort. It is simply a list that can be searched through and sorted through. This is good for listing items but only wanting to show
+    one major attribute or attribute set. Please explore to learn more.
+</p>
+<ul class="featurelist col-xs-6 col-sm-6">
+    <li class="">
+        <strong>Features:</strong>
+    </li>
+    <ng-container *ngFor="let i of this.features | search: searchText | sort: {property: listColumn, direction: listDirection}; let ind = index">
+        <li class="">
+            {{i}}
+        </li>
+    </ng-container>                                
+</ul>
+<ul class="featurelist col-xs-6 col-sm-6">
+    <li class="">
+        <strong>Practices:</strong>
+    </li>
+    <ng-container *ngFor="let i of this.practices | search: searchText | sort: {property: listColumn, direction: listDirection}; let ind = index">
+        <li class="">
+            {{i}}
+        </li>
+    </ng-container>                                
+</ul>
+<p class="col-xs-12 col-sm-12">
+    Please keep visiting as I am sure in time I will come up with more ways to make this an even more versatile solution.
+</p>
+
+    <p class="col-xs-12 col-sm-12">
+        Below is a demonstration of my custom pipe - Titlecase. It's simple but works effectively.
+    </p>
+    <div class="col-xs-12 col-sm-12">
+        <input type="text" class="form-control" [(ngModel)]="this.titlecaseText" placeholder="Enter any text" />
+    </div>
+    
+    <div class="col-xs-12 col-sm-12">
+        <p>Result: {{this.titlecaseText | titlecase}}</p>
+    </div>
+</div>

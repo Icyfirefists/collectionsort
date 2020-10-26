@@ -1,0 +1,29 @@
+<div>
+    <h2 class="tableTitle text-center">{{listTitle | titlecase}}</h2>
+    <p>
+        With Listsort, you are trading in the functionality of Tablesort for a smaller view that can fit into any section of any
+        Single-Page Application. You can scroll through a list of items, search for entries in available and export the data to excel and csv.
+    </p>
+    <div class="collection-functions row">                        
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <input type="text" class="form-control table-function" [(ngModel)]="searchText" name="searchText" placeholder="Search by Name, Age" />
+        </div>
+        <div class="col-xs-6 col-sm-6 row">
+          <div class="col-xs-12 col-sm-12 table-function-button-holder row">
+            <button class="btn btn-block filter-button col-xs-12 col-sm-12" (click)="exportExcel()">Export Excel</button>
+          </div>
+        </div>              
+      </div>
+      <br/> 
+      <div class="text-center listsort-header sorter" (click)="sort('last name')">Sort...</div>
+      <ul id="dataList" class="listsort">
+        <li class="text-center">
+            [First Name - Last Name]
+        </li>
+      <ng-container *ngFor="let i of this.iService.mockItems | search: searchText | sort: {property: listColumn, direction: listDirection}; let ind = index">
+        <li class="text-center">
+            {{i.fname}} {{i.lname}}
+        </li>
+      </ng-container>                                
+    </ul>
+</div>

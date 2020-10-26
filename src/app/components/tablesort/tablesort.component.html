@@ -1,0 +1,86 @@
+<div>
+    <h2 class="tableTitle text-center">{{tableTitle | titlecase}}</h2>
+      <p>
+         As stated above you can use this table according to the features listed. You can search by First Name, Last Name, and Age.
+         You can filter by Occupation and, by Male or Female Sex. You can limit the number of rows visible and can use pagination to
+         view the next stream of information based on the number of items and rows there are present. Tablesort can also be exported to PDF
+         and Excel document formats. Though Tablesort currently searches, sorts and filters based on attributes like First Name, Sex and Occupation,
+         it is highly customisable to do what you need it to do.
+      </p>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>          
+    </div> 
+    <div class="collection-functions row">
+        <div class="col-xs-3 col-sm-3 col-md-3">
+            <select class="rowLimiter table-function form-control" (change)="limitTableLength($event.target.value)">
+              <option value={{defaultTableLength}} selected>Limit No. of Rows:</option>
+              <option *ngFor="let i of tableRowLimits; let ind = index" value="{{i}}" >{{i}}</option>
+            </select>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <input type="text" class="form-control table-function" [(ngModel)]="searchText" name="searchText" placeholder="Search by Name, Age" />
+        </div>        
+        <div class="col-xs-3 col-sm-3 col-md-3">          
+          <select class="table-function form-control" (change)="filterBy($event.target.value)">
+            <option value="all" selected>Filter By:</option>
+            <option *ngFor="let i of tableFilters; let ind = index" value="{{i.toLowerCase()}}" >{{i}}</option>
+          </select>
+        </div>
+        <!-- Export Buttons -->
+        <div class="col-xs-3 col-sm-3 row">
+          <div class="col-xs-6 col-sm-6 table-function-button-holder row">
+            <button class="btn btn-block filter-button col-xs-12 col-sm-12" (click)="exportPDF()">Export PDF</button>
+          </div>
+          <div class="col-xs-6 col-sm-6 table-function-button-holder row">
+            <button class="btn btn-block filter-button col-xs-12 col-sm-12" (click)="exportExcel()">Export Excel</button>
+          </div>
+        </div>
+        <!-- End Export Buttons -->        
+      </div> 
+      <br/>
+      <div class="col-xs-12 col-sm-12 col-md-12 table-holder">
+        <table #dataTable id="dataTable" class="table tablesort table-hover">
+          <tr>
+            <!-- Clicks call the releavant component functions that will pair with the sort pipe -->
+            <ng-container *ngFor="let i of tableHeaders; let ind = index">
+              <th class="pointer text-center sorter" (click)="sort(i)">
+                {{i}}
+              </th>
+            </ng-container>
+          </tr>
+          <!--<tr *ngFor="let i of items | search: searchText | filter: filterTerm | sort: {property: tableColumn, direction: direction}| paginate: { itemsPerPage: tableLength, currentPage: p }; let ind = index">--><!-- | slice:0:tableLength; -->
+          <ng-container *ngFor="let i of iService.mockItems | search: searchText | filter: filterTerm | sort: {property: tableColumn, direction: tableDirection}| paginate: { itemsPerPage: tableLength, currentPage: p };">
+            <tr><!-- for use with api Data-->
+              <!--<ng-container *ngIf="ind < tableLength">-->
+                  <td class="text-center">
+                      {{i.id}}
+                    </td>
+                    <td class="text-center">
+                      {{i.fname}}
+                    </td>
+                    <td class="text-center">
+                      {{i.lname}}
+                    </td>
+                    <td class="text-center">
+                      {{i.username}}
+                    </td>
+                    <td class="text-center">
+                      {{i.sex | titlecase}}
+                    </td>
+                    <td class="text-center">
+                      {{i.age}}
+                    </td>
+                    <td class="text-center">
+                      {{i.phone}}
+                    </td>
+                    <td class="text-center">
+                      {{i.occupation | titlecase}}
+                    </td>  
+              <!--</ng-container>-->
+            </tr>
+          </ng-container>
+        </table>
+      </div>
+  </div>
